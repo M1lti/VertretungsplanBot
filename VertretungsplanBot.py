@@ -4,6 +4,7 @@
 yourSchool = ""
 yourUser = ""
 yourPassword = ""
+webhook = ""
 
 
 from pickle import TRUE
@@ -62,7 +63,6 @@ def getSubstituteData():
         return substitutionData
 
 def sendDiscordMessage(payload):
-    webhook = "https://discord.com/api/webhooks/1093622054244339814/QhrYbzVOat8VCrNKOv88VHVrP11qWoy0Ebb5comEniEIhTrLl_VUMqJ5Njcr9sL9aQY5"
     if getSubstituteDate() == None:
         r = requests.post(webhook, json={"embeds": [{"title": f"Kein Eintrag am {today_readable} vorhanden!","description": "","color": 16711680,"footer": {"text": ""},"author": {"name": ""},"fields": []}]})
     elif 'Keine Einträge! Aktuell liegen für die angemeldete Person keine Meldungen über Vertretungen vor!' in payload:
