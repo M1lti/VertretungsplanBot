@@ -1,11 +1,13 @@
 # yourSchool: Deine Schulnummer
 # yourUser: Dein Benutzername (meistens vorname.nachname)
 # yourPassword: Dein Passwort
+# webhook: Die URL der Discord-Webhook
+# webdriver: "firefox" oder "chromium"
 yourSchool = ""
 yourUser = ""
 yourPassword = ""
 webhook = ""
-
+webdriver = "firefox" 
 
 from pickle import TRUE
 from datetime import date
@@ -17,7 +19,16 @@ from selenium.webdriver.support import expected_conditions as EC
 import requests
 import json
 
-browser = webdriver.Firefox()
+if webdriver == "firefox":
+    browser = webdriver.Firefox()
+elif webdriver == "chromium":
+    chromeOptions = webdriver.ChromeOptions()
+    chromeOptions.add_argument("headless")
+
+    browser = webdriver.Chrome(options=chromeOptions)
+else:
+    raise SystemExit("'webdriver' nicht definiert!")
+
 today = date.today().strftime("%d_%m_%Y")
 today_readable = date.today().strftime("%d.%m.%Y")
 
