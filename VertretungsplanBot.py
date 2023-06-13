@@ -3,11 +3,13 @@
 # yourPassword: Dein Passwort
 # webhook: Die URL der Discord-Webhook
 # webdriver: "firefox" oder "chromium"
+# noDataNotification: Soll eine Benachrichtigung kommen, wenn kein Eintrag gefunden wurde?
 yourSchool = ""
 yourUser = ""
 yourPassword = ""
 webhook = ""
 webdriver = "firefox" 
+noDataNotification = TRUE
 
 from pickle import TRUE
 from datetime import date
@@ -74,7 +76,7 @@ def getSubstituteData():
         return substitutionData
 
 def sendDiscordMessage(payload):
-    if getSubstituteDate() == None:
+    if getSubstituteDate() == None & noDataNotification == TRUE:
         r = requests.post(webhook, json={"embeds": [{"title": f"Kein Eintrag am {today_readable} vorhanden!","description": "","color": 16711680,"footer": {"text": ""},"author": {"name": ""},"fields": []}]})
     elif 'Keine Einträge! Aktuell liegen für die angemeldete Person keine Meldungen über Vertretungen vor!' in payload:
         r = requests.post(webhook, json={"embeds": [{"title": f"Keine Vertretung am {today_readable}","description": "","color": 16711680,"footer": {"text": ""},"author": {"name": ""},"fields": []}]})
