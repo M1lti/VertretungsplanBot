@@ -1,3 +1,14 @@
+from pickle import TRUE
+from datetime import date
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.wait import WebDriverWait as Wait
+from selenium.webdriver.support import expected_conditions as EC
+import requests
+import json
+
+## CONFIG
 # yourSchool: Deine Schulnummer
 # yourUser: Dein Benutzername (meistens vorname.nachname)
 # yourPassword: Dein Passwort
@@ -10,16 +21,7 @@ yourPassword = ""
 webhook = ""
 webdriver = "firefox" 
 noDataNotification = TRUE
-
-from pickle import TRUE
-from datetime import date
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.wait import WebDriverWait as Wait
-from selenium.webdriver.support import expected_conditions as EC
-import requests
-import json
+## CONFIG END
 
 if webdriver == "firefox":
     browser = webdriver.Firefox()
