@@ -13,25 +13,25 @@ import json
 # yourUser: Dein Benutzername (meistens vorname.nachname)
 # yourPassword: Dein Passwort
 # webhook: Die URL der Discord-Webhook
-# webdriver: "firefox" oder "chromium"
+# userWebdriver: "firefox" oder "chromium"
 # noDataNotification: Soll eine Benachrichtigung kommen, wenn kein Eintrag gefunden wurde?
 yourSchool = ""
 yourUser = ""
 yourPassword = ""
 webhook = ""
-webdriver = "firefox" 
+userWebdriver = "firefox" 
 noDataNotification = TRUE
 ## CONFIG END
 
-if webdriver == "firefox":
+if userWebdriver == "firefox":
     browser = webdriver.Firefox()
-elif webdriver == "chromium":
+elif userWebdriver == "chromium":
     chromeOptions = webdriver.ChromeOptions()
     chromeOptions.add_argument("headless")
 
     browser = webdriver.Chrome(options=chromeOptions)
 else:
-    raise SystemExit("'webdriver' nicht definiert!")
+    raise SystemExit("'userWebdriver' nicht definiert!")
 
 today = date.today().strftime("%d_%m_%Y")
 today_readable = date.today().strftime("%d.%m.%Y")
@@ -78,7 +78,7 @@ def getSubstituteData():
         return substitutionData
 
 def sendDiscordMessage(payload):
-    if getSubstituteDate() == None & noDataNotification == TRUE:
+    if getSubstituteDate() == None and noDataNotification == TRUE:
         r = requests.post(webhook, json={"embeds": [{"title": f"Kein Eintrag am {today_readable} vorhanden!","description": "","color": 16711680,"footer": {"text": ""},"author": {"name": ""},"fields": []}]})
     elif 'Keine Einträge! Aktuell liegen für die angemeldete Person keine Meldungen über Vertretungen vor!' in payload:
         r = requests.post(webhook, json={"embeds": [{"title": f"Keine Vertretung am {today_readable}","description": "","color": 16711680,"footer": {"text": ""},"author": {"name": ""},"fields": []}]})
